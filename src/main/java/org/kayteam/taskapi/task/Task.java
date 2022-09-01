@@ -18,32 +18,65 @@ public abstract class Task{
 
     }
 
-    public void startScheduler() {
+    /**
+     * Start the task.
+     */
+    public void startTask() {
+
+        preStartActions();
 
         BukkitScheduler scheduler = javaPlugin.getServer().getScheduler();
 
         bukkitTask = scheduler.runTaskTimer(javaPlugin, this::actions, 0L, ticks);
 
-    }
-
-    public void stopScheduler(){
-
-        BukkitScheduler scheduler = javaPlugin.getServer().getScheduler();
-
-        scheduler.cancelTask(bukkitTask.getTaskId());
-
-        stopActions();
+        postStartActions();
 
     }
 
-    public abstract void actions();
-
-    public void stopActions(){}
-
+    /**
+     * Verify if the task is running.
+     */
     public boolean isRunning() {
 
         return javaPlugin.getServer().getScheduler().isCurrentlyRunning(bukkitTask.getTaskId());
 
     }
+
+    /**
+     * Stop the task.
+     */
+    public void stopTask(){
+
+        preStopActions();
+
+        BukkitScheduler scheduler = javaPlugin.getServer().getScheduler();
+
+        scheduler.cancelTask(bukkitTask.getTaskId());
+
+        postStopActions();
+
+    }
+
+    public abstract void actions();
+
+    /**
+     * Executed before starting the task
+     */
+    public void preStartActions() {}
+
+    /**
+     * Executed after starting the task
+     */
+    public void postStartActions() {}
+
+    /**
+     * Executed before stopping the task
+     */
+    public void preStopActions() {}
+
+    /**
+     * Executed after stopping the task
+     */
+    public void postStopActions() {}
 
 }
