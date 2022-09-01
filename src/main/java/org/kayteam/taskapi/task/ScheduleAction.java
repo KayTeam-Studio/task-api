@@ -1,4 +1,4 @@
-package task;
+package org.kayteam.taskapi.task;
 
 import org.bukkit.scheduler.BukkitTask;
 
