@@ -1,0 +1,7 @@
+name: Task Api
+version: '${project.version}'
+main: org.kayteam.taskapi.TaskApi
+api-version: 1.13
+authors: [ SoyAldo, segu23 ]
+description: Create and manage tasks for your minecraft add-ons with ease.
+website: https://kayteam.org
